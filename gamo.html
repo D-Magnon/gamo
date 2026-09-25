@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Memento</title>
@@ -8,9 +9,10 @@
 body {
   position: relative;
   background: black;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+   justify-content: center;
+ align-items: center;
+ height: 98vh;
+ flex-direction: column;
 }
 
 .square {
@@ -18,14 +20,33 @@ body {
   width: 20px;
   height: 20px;
   background: white;
-  left: 100px;
-  right: 100px;
+  left: 50%;
+  top: 500px;
 }
   </style>
-  <head>
-
+  
   </head>
   <body>
     <div class="square" id="squarey"></div>
     <div class="camera-viewport"></div>
+    
+    
+    <script>
+      
+      function gameLoop() {
+        requestAnimationFrame(gameLoop);
+      }
+      gameLoop();
+      let movingup = false;
+      let movingdown = false;
+      let movingright = false;
+      let movingleft = false;
+      document.addEventListener("keydown", function() {
+        
+      });
+      
+    </script>
   </body>
+</html>
+
+  
