@@ -1,52 +1,72 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+<head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Memento</title>
   <style>
-@import url('https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400..700&family=Press+Start+2P&family=VT323&display=swap');
-body {
-  position: relative;
-  background: black;
-   justify-content: center;
- align-items: center;
- height: 98vh;
- flex-direction: column;
-}
+    @import url('https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400..700&family=Press+Start+2P&family=VT323&display=swap');
 
-.square {
-  position: absolute;
-  width: 20px;
-  height: 20px;
-  background: white;
-  left: 50%;
-  top: 500px;
-}
+    body {
+      position: relative;
+      background: black;
+      justify-content: center;
+      align-items: center;
+      height: 98vh;
+      flex-direction: column;
+    }
+    
+    .square {
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      background: white;
+      left: 750px;
+      top: 500px;
+    }
   </style>
   
-  </head>
-  <body>
-    <div class="square" id="squarey"></div>
-    <div class="camera-viewport"></div>
-    
-    
-    <script>
-      
-      function gameLoop() {
-        requestAnimationFrame(gameLoop);
-      }
-      gameLoop();
-      let movingup = false;
-      let movingdown = false;
-      let movingright = false;
-      let movingleft = false;
-      document.addEventListener("keydown", function() {
-        
-      });
-      
-    </script>
-  </body>
-</html>
+</head>
 
+<body>
+  <div class="square" id="squarey"></div>
+  <div class="camera-viewport"></div>
   
+  
+  <script>
+  let squarey = document.getElementById("squarey");
+  
+    let movingup = false;
+    let movingdown = false;
+    let movingright = false;
+    let movingleft = false;
+    let x = 750;
+    let y = 500;
+    
+    function gameLoop() {
+      requestAnimationFrame(gameLoop);
+      if (movingup === true) { y = y - 5; }
+      if (movingdown === true) { y = y + 5; }
+      if (movingright === true) { x = x + 5; }
+      if (movingleft === true) { x = x - 5; }
+      squarey.style.left = `${x}px`;
+      squarey.style.top = `${y}px`;
+    }
+    gameLoop();
+    
+    document.addEventListener("keydown", function (event) {
+      if(event.key === "ArrowUp") { movingup = true; }
+      if(event.key === "ArrowDown") { movingdown = true; }
+      if(event.key === "ArrowRight") { movingright = true; }
+      if(event.key === "ArrowLeft") { movingleft = true; }
+    });
+    document.addEventListener("keyup", function(event) {
+      if(event.key === "ArrowUp") { movingup = false; }
+      if(event.key === "ArrowDown") { movingdown = false; }
+      if(event.key === "ArrowRight") { movingright = false; }
+      if(event.key === "ArrowLeft") { movingleft = false; }
+    });
+  </script>
+</body>
+
+</html>
