@@ -8,12 +8,11 @@
     @import url('https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400..700&family=Press+Start+2P&family=VT323&display=swap');
 
     body {
-      position: relative;
+      position: fixed;
       background: black;
       justify-content: center;
       align-items: center;
       height: 98vh;
-      flex-direction: column;
     }
     
     .square {
@@ -24,16 +23,57 @@
       left: 750px;
       top: 500px;
     }
+    
+    .btnup {
+      position: absolute;
+      width: 700px;
+      height: 350px;
+      top: 10px;
+      left: 400px;
+    }
+    
+    .btndown {
+      position: absolute;
+      width: 700px;
+      height: 350px;
+      top: 500px;
+      left: 400px;
+    }
+    
+    .btnright {
+      position: absolute;
+      width: 350px;
+      height: 700px;
+      top: 90px;
+      left: 1157px;
+    }
+    
+    .btnleft {
+    position: absolute;
+    width: 350px;
+    height: 700px;
+    top: 90px;
+    left: -10px;
+    }
+   
   </style>
   
 </head>
 
 <body>
+  
   <div class="square" id="squarey"></div>
+  <div class="btnup" id="W"></div>
+  <div class="btnleft" id="A"></div>
+  <div class="btndown" id="S"></div>
+  <div class="btnright" id="D"></div>
   <div class="camera-viewport"></div>
   
-  
   <script>
+  let W = document.getElementById("W");
+  let A = document.getElementById("A");
+  let S = document.getElementById("S");
+  let D = document.getElementById("D");
   let squarey = document.getElementById("squarey");
   
     let movingup = false;
@@ -45,27 +85,52 @@
     
     function gameLoop() {
       requestAnimationFrame(gameLoop);
-      if (movingup === true) { y = y - 5; }
-      if (movingdown === true) { y = y + 5; }
-      if (movingright === true) { x = x + 5; }
-      if (movingleft === true) { x = x - 5; }
+      if (movingup === true) { y = y - 2; }
+      if (movingdown === true) { y = y + 2; }
+      if (movingright === true) { x = x + 2; }
+      if (movingleft === true) { x = x - 2; }
       squarey.style.left = `${x}px`;
       squarey.style.top = `${y}px`;
     }
     gameLoop();
     
-    document.addEventListener("keydown", function (event) {
-      if(event.key === "ArrowUp") { movingup = true; }
-      if(event.key === "ArrowDown") { movingdown = true; }
-      if(event.key === "ArrowRight") { movingright = true; }
-      if(event.key === "ArrowLeft") { movingleft = true; }
+         W.addEventListener("pointerdown", function() {
+           movingup = true;
+         });
+         W.addEventListener("pointerup", function() {
+           movingup = false;
+         });
+         A.addEventListener("pointerdown", function() {
+           movingleft = true;
+         });  
+         A.addEventListener("pointerup", function() {
+           movingleft = false;  
+         });
+         S.addEventListener("pointerdown", function() {
+           movingdown = true;
+         });
+         S.addEventListener("pointerup", function() {
+           movingdown = false;
+         });
+         D.addEventListener("pointerdown", function() {
+           movingright = true;
+         });
+         D.addEventListener("pointerup", function() {
+           movingright = false;
+         });
+    document.addEventListener("keydown", function(event) {
+      if(event.key === "ArrowUp") {movingup = true; }
+      if(event.key === "ArrowDown") {movingdown = true; }
+      if(event.key === "ArrowRight") {movingright = true; }
+      if(event.key === "ArrowLeft") {movingleft = true; }
     });
-    document.addEventListener("keyup", function(event) {
-      if(event.key === "ArrowUp") { movingup = false; }
-      if(event.key === "ArrowDown") { movingdown = false; }
-      if(event.key === "ArrowRight") { movingright = false; }
-      if(event.key === "ArrowLeft") { movingleft = false; }
+    document.addEventListener("keyup", function(notevent) {
+      if(notevent.key === "ArrowUp") {movingup = false; }
+      if(notevent.key === "ArrowDown") {movingdown = false; }
+      if(notevent.key === "ArrowRight") {movingright = false; }
+      if(notevent.key === "ArrowLeft") {movingleft = false; }
     });
+    
   </script>
 </body>
 
