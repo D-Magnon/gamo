@@ -15,15 +15,35 @@
     }
     
     .square {
+      z-index: 2;
       position: absolute;
-      width: 2vw;
-      height: 3vh;
+      width: 4vh;
+      height: 4vh;
       background: white;
-      left: 50vw;
+      left: 49vw;
       top: 50vh;
     }
     
+    .worldmap {
+      z-index: 1;
+      position: absolute;
+      background: #d6a14b;
+      width: 3000px;
+      height: 3000px;
+    }
+    
+    .block {
+      z-index: 1;
+      position: absolute;
+      background: green;
+      width: 20px;
+      height: 20px;
+      top: 50px;
+      left: 50px;
+    }
+
     .btnup {
+      z-index: 10;
       position: absolute;
       width: 45.5vw;
       height: 42vh;
@@ -31,6 +51,7 @@
     }
     
     .btndown {
+      z-index: 10;
       position: absolute;
       width: 45.5vw;
       height: 42vh;
@@ -39,6 +60,7 @@
     }
     
     .btnright {
+      z-index: 10;
       position: absolute;
       width: 26.5vw;
       height: 45vh;
@@ -47,6 +69,7 @@
     }
     
     .btnleft {
+      z-index: 10;
     position: absolute;
     width: 26.5vw;
     height: 45vh;
@@ -54,20 +77,23 @@
     }
    
    .btnUPleft {
+     z-index: 10;
      position: absolute;
      width: 26.5vw;
      height: 27vh;
    }
    
    .btnDOWNleft {
+     z-index: 10;
      position: absolute;
      width: 26.5vw;
      height: 27vh;
      top: 72vh;
      left: 0.0005vw;
-    }
+   }
    
    .btnUPright {
+     z-index: 10;
      position: absolute;
      width: 26.5vw;
      height: 27vh;
@@ -76,6 +102,7 @@
    }
    
    .btnDOWNright {
+     z-index: 10;
      position: absolute;
      width: 26.5vw;
      height: 27vh;
@@ -97,7 +124,9 @@
   <div class="btnUPright" id="WD"></div>
   <div class="btnDOWNleft" id="SA"></div>
   <div class="btnDOWNright" id="SD"></div>
-  <div class="camera-viewport"></div>
+  <div class="worldmap" id="map"></div>
+  <div class="block"></div>
+  <div class="block2"></div>
   
   <script>
   let W = document.getElementById("W");
@@ -114,15 +143,15 @@
     let movingdown = false;
     let movingright = false;
     let movingleft = false;
-    let x = 50;
+    let x = 49;
     let y = 50;
     
     function gameLoop() {
       requestAnimationFrame(gameLoop);
-      if (movingup === true) { y = y - 0.2; }
-      if (movingdown === true) { y = y + 0.2; }
-      if (movingright === true) { x = x + 0.2; }
-      if (movingleft === true) { x = x - 0.2; }
+      if (movingup === true) { y = y - 0.15; }
+      if (movingdown === true) { y = y + 0.15; }
+      if (movingright === true) { x = x + 0.15; }
+      if (movingleft === true) { x = x - 0.15; }
       squarey.style.left = `${x}vw`;
       squarey.style.top = `${y}vh`;
     }
@@ -134,16 +163,34 @@
          W.addEventListener("pointerup", function() {
            movingup = false;
          });
+         W.addEventListener("pointerleave", function() {
+           movingup = false;
+         });
+         W.addEventListener("pointercancel", function() {
+           movingup = false;
+         });
          A.addEventListener("pointerdown", function() {
            movingleft = true;
          });  
          A.addEventListener("pointerup", function() {
            movingleft = false;  
          });
+         A.addEventListener("pointerleave", function() {
+           movingleft = false;
+         });
+         A.addEventListener("pointercancel", function() {
+           movingleft = false;
+         });
          S.addEventListener("pointerdown", function() {
            movingdown = true;
          });
          S.addEventListener("pointerup", function() {
+           movingdown = false;
+         });
+         S.addEventListener("pointerleave", function() {
+           movingdown = false;
+         });
+         S.addEventListener("pointercancel", function() {
            movingdown = false;
          });
          D.addEventListener("pointerdown", function() {
@@ -152,11 +199,25 @@
          D.addEventListener("pointerup", function() {
            movingright = false;
          });
+         D.addEventListener("pointerleave", function() {
+           movingright = false;
+         });
+         D.addEventListener("pointercancel", function() {
+           movingright = false;
+         });
          WA.addEventListener("pointerdown", function() {
           movingup = true;
           movingleft = true;
          });
          WA.addEventListener("pointerup", function() {
+           movingup = false;
+           movingleft = false;
+         });
+         WA.addEventListener("pointerleave", function() {
+           movingup = false;
+           movingleft = false;
+         });
+         WA.addEventListener("pointercancel", function() {
            movingup = false;
            movingleft = false;
          });
@@ -168,6 +229,14 @@
            movingup = false;
            movingright = false;
          });
+         WD.addEventListener("pointerleave", function() {
+           movingup = false;
+           movingright = false;
+         });
+         WD.addEventListener("pointercancel", function() {
+           movingup = false;
+           movingright = false;
+         });
          SA.addEventListener("pointerdown", function() {
            movingdown = true;
            movingleft = true;
@@ -176,11 +245,27 @@
            movingdown = false;
            movingleft = false;
          });
+         SA.addEventListener("pointerleave", function() {
+           movingdown = false;
+           movingleft = false;
+         });
+         SA.addEventListener("pointercancel", function() {
+           movingdown = false;
+           movingleft = false;
+         });
          SD.addEventListener("pointerdown", function() {
            movingdown = true;
            movingright = true;
          });
          SD.addEventListener("pointerup", function() {
+           movingdown = false;
+           movingright = false;
+         });
+         SD.addEventListener("pointerleave", function() {
+           movingdown = false;
+           movingright = false;
+         });
+         SD.addEventListener("pointercancel", function() {
            movingdown = false;
            movingright = false;
          });
