@@ -114,17 +114,17 @@
     let movingdown = false;
     let movingright = false;
     let movingleft = false;
-    let x = 750;
-    let y = 500;
+    let x = 50;
+    let y = 50;
     
     function gameLoop() {
       requestAnimationFrame(gameLoop);
-      if (movingup === true) { y = y - 2; }
-      if (movingdown === true) { y = y + 2; }
-      if (movingright === true) { x = x + 2; }
-      if (movingleft === true) { x = x - 2; }
-      squarey.style.left = `${x}px`;
-      squarey.style.top = `${y}px`;
+      if (movingup === true) { y = y - 0.2; }
+      if (movingdown === true) { y = y + 0.2; }
+      if (movingright === true) { x = x + 0.2; }
+      if (movingleft === true) { x = x - 0.2; }
+      squarey.style.left = `${x}vw`;
+      squarey.style.top = `${y}vh`;
     }
     gameLoop();
     
