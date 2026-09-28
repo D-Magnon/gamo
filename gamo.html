@@ -41,6 +41,16 @@
       top: 50px;
       left: 50px;
     }
+    
+    .block2 {
+      z-index: 1;
+      position: absolute;
+      background: green;
+      width: 20px;
+      height: 20px;
+      top: 100px;
+      left: 300px;
+    }
 
     .btnup {
       z-index: 10;
@@ -70,45 +80,46 @@
     
     .btnleft {
       z-index: 10;
-    position: absolute;
-    width: 26.5vw;
-    height: 45vh;
-    top: 27vh;
+      position: absolute;
+      width: 26.5vw;
+      height: 45vh;
+      top: 27vh;
     }
    
-   .btnUPleft {
-     z-index: 10;
-     position: absolute;
-     width: 26.5vw;
-     height: 27vh;
-   }
+    .btnUPleft {
+      z-index: 10;
+      position: absolute;
+      width: 26.5vw;
+      height: 27vh;
+    }
    
-   .btnDOWNleft {
-     z-index: 10;
-     position: absolute;
-     width: 26.5vw;
-     height: 27vh;
-     top: 72vh;
-     left: 0.0005vw;
-   }
+    .btnDOWNleft {
+      z-index: 10;
+      position: absolute;
+      width: 26.5vw;
+      height: 27vh;
+      top: 72vh;
+      left: 0.0005vw;
+    }
    
-   .btnUPright {
-     z-index: 10;
-     position: absolute;
-     width: 26.5vw;
-     height: 27vh;
-     top: 0.005vh;
-     left: 73vw;
-   }
+    .btnUPright {
+      z-index: 10;
+      position: absolute;
+      width: 26.5vw;
+      height: 27vh;
+      top: 0.005vh;
+      left: 73vw;
+    }
    
-   .btnDOWNright {
-     z-index: 10;
-     position: absolute;
-     width: 26.5vw;
-     height: 27vh;
-     top: 72vh;
-     left: 73vw;
-   }
+    .btnDOWNright {
+      z-index: 10;
+      position: absolute;
+      width: 26.5vw;
+      height: 27vh;
+      top: 72vh;
+      left: 73vw;
+    }
+    
   </style>
   
 </head>
@@ -124,11 +135,12 @@
   <div class="btnUPright" id="WD"></div>
   <div class="btnDOWNleft" id="SA"></div>
   <div class="btnDOWNright" id="SD"></div>
-  <div class="worldmap" id="map"></div>
+  <div class="worldmap" id="map">
   <div class="block"></div>
   <div class="block2"></div>
-  
+  </div>
   <script>
+  
   let W = document.getElementById("W");
   let A = document.getElementById("A");
   let S = document.getElementById("S");
@@ -137,7 +149,9 @@
   let WD = document.getElementById("WD");
   let SA = document.getElementById("SA");
   let SD = document.getElementById("SD");
+  
   let squarey = document.getElementById("squarey");
+  let map = document.getElementById("map");
   
     let movingup = false;
     let movingdown = false;
@@ -156,6 +170,19 @@
       squarey.style.top = `${y}vh`;
     }
     gameLoop();
+    
+    function worldLoop() {
+      requestAnimationFrame(worldLoop); 
+      if (movingup === true) { y = y + 1; }
+      if (movingdown === true) { y = y - 1; }
+      if (movingright === true) { x = x - 1; }
+      if (movingleft === true) { x = x + 1; }
+      map.style.left = `${x}px`;
+      map.style.top = `${y}px`;
+    }
+    worldLoop();
+    let x = 3000;
+    let y = 3000px
     
          W.addEventListener("pointerdown", function() {
            movingup = true;
