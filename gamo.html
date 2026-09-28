@@ -12,50 +12,76 @@
       background: black;
       justify-content: center;
       align-items: center;
-      height: 98vh;
     }
     
     .square {
       position: absolute;
-      width: 20px;
-      height: 20px;
+      width: 2vw;
+      height: 3vh;
       background: white;
-      left: 750px;
-      top: 500px;
+      left: 50vw;
+      top: 50vh;
     }
     
     .btnup {
       position: absolute;
-      width: 700px;
-      height: 350px;
-      top: 10px;
-      left: 400px;
+      width: 45.5vw;
+      height: 42vh;
+      left: 27vw;
     }
     
     .btndown {
       position: absolute;
-      width: 700px;
-      height: 350px;
-      top: 500px;
-      left: 400px;
+      width: 45.5vw;
+      height: 42vh;
+      top: 60vh;
+      left: 27vw;
     }
     
     .btnright {
       position: absolute;
-      width: 350px;
-      height: 700px;
-      top: 90px;
-      left: 1157px;
+      width: 26.5vw;
+      height: 45vh;
+      top: 27vh;
+      left: 73vw;
     }
     
     .btnleft {
     position: absolute;
-    width: 350px;
-    height: 700px;
-    top: 90px;
-    left: -10px;
+    width: 26.5vw;
+    height: 45vh;
+    top: 27vh;
     }
    
+   .btnUPleft {
+     position: absolute;
+     width: 26.5vw;
+     height: 27vh;
+   }
+   
+   .btnDOWNleft {
+     position: absolute;
+     width: 26.5vw;
+     height: 27vh;
+     top: 72vh;
+     left: 0.0005vw;
+    }
+   
+   .btnUPright {
+     position: absolute;
+     width: 26.5vw;
+     height: 27vh;
+     top: 0.005vh;
+     left: 73vw;
+   }
+   
+   .btnDOWNright {
+     position: absolute;
+     width: 26.5vw;
+     height: 27vh;
+     top: 72vh;
+     left: 73vw;
+   }
   </style>
   
 </head>
@@ -67,6 +93,10 @@
   <div class="btnleft" id="A"></div>
   <div class="btndown" id="S"></div>
   <div class="btnright" id="D"></div>
+  <div class="btnUPleft" id="WA"></div>
+  <div class="btnUPright" id="WD"></div>
+  <div class="btnDOWNleft" id="SA"></div>
+  <div class="btnDOWNright" id="SD"></div>
   <div class="camera-viewport"></div>
   
   <script>
@@ -74,6 +104,10 @@
   let A = document.getElementById("A");
   let S = document.getElementById("S");
   let D = document.getElementById("D");
+  let WA = document.getElementById("WA");
+  let WD = document.getElementById("WD");
+  let SA = document.getElementById("SA");
+  let SD = document.getElementById("SD");
   let squarey = document.getElementById("squarey");
   
     let movingup = false;
@@ -118,17 +152,50 @@
          D.addEventListener("pointerup", function() {
            movingright = false;
          });
+         WA.addEventListener("pointerdown", function() {
+          movingup = true;
+          movingleft = true;
+         });
+         WA.addEventListener("pointerup", function() {
+           movingup = false;
+           movingleft = false;
+         });
+         WD.addEventListener("pointerdown", function() {
+           movingup = true;
+           movingright = true;
+         });
+         WD.addEventListener("pointerup", function() {
+           movingup = false;
+           movingright = false;
+         });
+         SA.addEventListener("pointerdown", function() {
+           movingdown = true;
+           movingleft = true;
+         });
+         SA.addEventListener("pointerup", function() {
+           movingdown = false;
+           movingleft = false;
+         });
+         SD.addEventListener("pointerdown", function() {
+           movingdown = true;
+           movingright = true;
+         });
+         SD.addEventListener("pointerup", function() {
+           movingdown = false;
+           movingright = false;
+         });
+         
     document.addEventListener("keydown", function(event) {
-      if(event.key === "ArrowUp") {movingup = true; }
-      if(event.key === "ArrowDown") {movingdown = true; }
-      if(event.key === "ArrowRight") {movingright = true; }
-      if(event.key === "ArrowLeft") {movingleft = true; }
+      if(event.key === "ArrowUp" || event.key === "w") {movingup = true; }
+      if(event.key === "ArrowDown" || event.key === "s") {movingdown = true; }
+      if(event.key === "ArrowRight" || event.key === "d") {movingright = true; }
+      if(event.key === "ArrowLeft" || event.key === "a") {movingleft = true; }
     });
     document.addEventListener("keyup", function(notevent) {
-      if(notevent.key === "ArrowUp") {movingup = false; }
-      if(notevent.key === "ArrowDown") {movingdown = false; }
-      if(notevent.key === "ArrowRight") {movingright = false; }
-      if(notevent.key === "ArrowLeft") {movingleft = false; }
+      if(notevent.key === "ArrowUp" || notevent.key === "w") {movingup = false; }
+      if(notevent.key === "ArrowDown" || notevent.key === "s") {movingdown = false; }
+      if(notevent.key === "ArrowRight" || notevent.key === "d") {movingright = false; }
+      if(notevent.key === "ArrowLeft" || notevent.key === "a") {movingleft = false; }
     });
     
   </script>
