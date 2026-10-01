@@ -38,8 +38,8 @@
       background: green;
       width: 20px;
       height: 20px;
-      top: 50px;
-      left: 50px;
+      top: 60%;
+      left: 50%;
     }
     
     .block2 {
@@ -157,32 +157,19 @@
     let movingdown = false;
     let movingright = false;
     let movingleft = false;
-    let x = 49;
-    let y = 50;
-    
-    function gameLoop() {
-      requestAnimationFrame(gameLoop);
-      if (movingup === true) { y = y - 0.15; }
-      if (movingdown === true) { y = y + 0.15; }
-      if (movingright === true) { x = x + 0.15; }
-      if (movingleft === true) { x = x - 0.15; }
-      squarey.style.left = `${x}vw`;
-      squarey.style.top = `${y}vh`;
-    }
-    gameLoop();
+    let mapX = -((3000 - window.innerWidth))/2;
+    let mapY = -(3000 - window.innerHeight);
     
     function worldLoop() {
       requestAnimationFrame(worldLoop); 
-      if (movingup === true) { y = y + 1; }
-      if (movingdown === true) { y = y - 1; }
-      if (movingright === true) { x = x - 1; }
-      if (movingleft === true) { x = x + 1; }
-      map.style.left = `${x}px`;
-      map.style.top = `${y}px`;
+      if (movingup === true) { mapY = mapY + 1; }
+      if (movingdown === true) { mapY = mapY - 1; }
+      if (movingright === true) { mapX = mapX - 1; }
+      if (movingleft === true) { mapX = mapX + 1; }
+      map.style.left = `${mapX}px`;
+      map.style.top = `${mapY}px`;
     }
     worldLoop();
-    let x = 3000;
-    let y = 3000px
     
          W.addEventListener("pointerdown", function() {
            movingup = true;
